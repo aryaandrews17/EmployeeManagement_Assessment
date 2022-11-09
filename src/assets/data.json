@@ -1,0 +1,16 @@
+[
+    {
+        "fieldName": "EmployeeId",
+        "fieldType": "number",
+        "validator": [
+            "required"
+        ]
+    },
+    {
+        "fieldName": "Password",
+        "fieldType": "password",
+        "validator": [
+            "required"
+        ]
+    }
+]

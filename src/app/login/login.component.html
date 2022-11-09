@@ -1,0 +1,10 @@
+<form [formGroup]="form" id="form" (ngSubmit)="onSubmit()">
+
+        <div *ngFor="let formField of formFields" style="margin: 1em 0">
+                <label id="Labels"> {{ formField.fieldName }} :</label>
+                <input id="inputfield" type="{{ formField.fieldType }}" value="{{ formField.fieldName }}"
+                        [required]="formField.validator" formControlName="{{ formField.fieldName }}">
+                <br>
+        </div>
+        <button id="submit" type="submit" [disabled]="this.form.invalid">Submit</button>
+</form>

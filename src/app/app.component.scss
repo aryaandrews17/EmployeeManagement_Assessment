@@ -1,0 +1,41 @@
+#navTool {
+    background-color: rgb(223, 223, 255);
+    padding: 20px;
+    margin: 20px;
+    height: 50px;
+}
+
+#mainPage {
+    background-color: rgb(236, 236, 246);
+    padding: 20px;
+    margin: 5px;
+    text-align: center;
+}
+
+h1 {
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+
+#login,
+#EmployeeList {
+    text-align: left;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    padding: 5px;
+    float: left;
+    margin: 5px;
+
+}
+
+#logout {
+    text-align: left;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    padding: 5px;
+    float: right;
+    margin: 5px;
+}
