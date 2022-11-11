@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IEmployeeInformation } from '../employee/listInterface';
+import { InfoListServiceService } from '../services/info-list-service.service';
 import { LoginService } from '../services/login.service';
 import { IForm } from './iform';
 
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   flag: number = 0;
 
 
-  constructor(private httpClient: HttpClient, private router: Router, private Log: LoginService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private Log: LoginService, private ListService: InfoListServiceService) { }
 
   ngOnInit(): void {
     this.httpClient.get<IForm[]>('/assets/data.json').subscribe((formFields: IForm[]) => {
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
       }
       this.formFields = formFields;
     });
-    this.listOfEmployees= JSON.parse(localStorage.getItem("EmployeeInformation") || "{}")
+    this.ListService.setDataInLocalStorage();
+    this.listOfEmployees = JSON.parse(localStorage.getItem("EmployeeInformation") || "{}");
   }
 
   private getValidator(formField: IForm): ValidatorFn[] {
@@ -47,7 +49,8 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.checkCredentials();
     }
-    if (this.flag == 0) { console.log('invalid details') }
+    if (this.flag == 0)
+    { window.alert('invalid details'); }
   }
 
   checkCredentials() {
@@ -55,7 +58,7 @@ export class LoginComponent implements OnInit {
     var employeeId = this.form.get('EmployeeId')?.value;
     for (let i of this.listOfEmployees) {
       if (i.Password == String(password) && i.EmployeeId == Number(employeeId)) {
-        this.router.navigate(['Employee/EmployeeInformation'], { queryParams: { employeeId } })
+        this.router.navigate(['Employee/EmployeeInformation'], { queryParams: { employeeId } });
         this.flag++;
         localStorage.setItem("CurrentIndividual", JSON.stringify(i));
       }

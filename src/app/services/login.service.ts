@@ -6,6 +6,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoginService {
 
+  constructor() { }
+
+  
   private LoginStatus$ = new BehaviorSubject(false);
   public isLoggedIn = this.LoginStatus$.asObservable();
 
@@ -20,5 +23,4 @@ export class LoginService {
     return false;
   }
 
-  constructor() { }
 }

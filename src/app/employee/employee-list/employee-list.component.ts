@@ -20,7 +20,7 @@ export class EmployeeListComponent implements OnInit {
 
     this.EmployeeList = JSON.parse(localStorage.getItem("EmployeeInformation") || "{}")
     for (let info of this.EmployeeList) {
-      info.TeamNumber = this.EmployeeInfoList.getTeamDepartment(Number(info.TeamNumber))
+      info.TeamNumber = this.EmployeeInfoList.getTeamDepartment(Number(info.TeamNumber));
     }
   }
 

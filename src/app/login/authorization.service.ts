@@ -20,7 +20,7 @@ export class AuthorizationService implements CanActivate {
     canActivate(): boolean {
         this.currentUser = JSON.parse(localStorage.getItem('CurrentIndividual') || "{}");
         if (JSON.stringify(this.currentUser) == '{}') {
-            this.LoginStatus$.next(false)
+            this.LoginStatus$.next(false);
             this.router.navigate(['/Login']);
             return false;
         }

@@ -22,13 +22,13 @@ export class EmployeeInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.EmployeeInfoList.setDataInLocalStorage();
-    this.EmployeeList = JSON.parse(localStorage.getItem("EmployeeInformation") || "{}")
+    this.EmployeeList = JSON.parse(localStorage.getItem("EmployeeInformation") || "{}");
     this.route.queryParams.subscribe(params => {
       this.empId = Number(params['employeeId'])
-    })
+    });
     for (let info of this.EmployeeList) {
       if (info.EmployeeId == this.empId) {
-        this.currentUserDetails = info
+        this.currentUserDetails = info;
       }
     }
   }
