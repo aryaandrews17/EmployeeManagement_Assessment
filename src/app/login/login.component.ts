@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {  FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { InfoListServiceService } from '../employee/employee-information/info-list-service.service';
-import { EmployeeInformation } from '../employee/listInterface';
+import { IEmployeeInformation } from '../employee/listInterface';
 import { LoginService } from '../services/login.service';
+import { IForm } from './iform';
 
 
 @Component({
@@ -13,25 +13,25 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  formFields: any[] = []
+  formFields: IForm[] = []
   form = new FormGroup({});
-  listOfEmployees: EmployeeInformation[] = [];
+  listOfEmployees: IEmployeeInformation[] = [];
   flag: number = 0;
 
 
-  constructor(private EmployeeInfoList: InfoListServiceService, private httpClient: HttpClient, private router: Router, private Log: LoginService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private Log: LoginService) { }
 
   ngOnInit(): void {
-    this.httpClient.get<any[]>('/assets/data.json').subscribe((formFields: any[]) => {
+    this.httpClient.get<IForm[]>('/assets/data.json').subscribe((formFields: IForm[]) => {
       for (const formField of formFields) {
         this.form.addControl(formField.fieldName, new FormControl('', this.getValidator(formField)));
-
       }
       this.formFields = formFields;
     });
+    this.listOfEmployees= JSON.parse(localStorage.getItem("EmployeeInformation") || "{}")
   }
 
-  private getValidator(formField: any): ValidatorFn[] {
+  private getValidator(formField: IForm): ValidatorFn[] {
     let validation: ValidatorFn[] = [];
     for (const valid of formField.validator) {
       switch (valid) {
@@ -50,22 +50,12 @@ export class LoginComponent implements OnInit {
     if (this.flag == 0) { console.log('invalid details') }
   }
 
-  getEmployeeData() {
-    this.listOfEmployees = this.EmployeeInfoList.GetEmployeeInfoList();
-  }
-
-  checkCredentials(): any {
-    let i: any;
-    let CurrentUser: any[];
-    const x = this.getEmployeeData();
-
+  checkCredentials() {
     var password = this.form.get('Password')?.value;
     var employeeId = this.form.get('EmployeeId')?.value;
-    CurrentUser = [employeeId, password]
-    for (i of this.listOfEmployees) {
-      if (i.Password == password && i.EmployeeId == employeeId) {
+    for (let i of this.listOfEmployees) {
+      if (i.Password == String(password) && i.EmployeeId == Number(employeeId)) {
         this.router.navigate(['Employee/EmployeeInformation'], { queryParams: { employeeId } })
-        console.log(this.form.value);
         this.flag++;
         localStorage.setItem("CurrentIndividual", JSON.stringify(i));
       }

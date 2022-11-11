@@ -1,5 +1,5 @@
 <mat-grid-list id="grid-list" cols="2" rowHeight="2:1">
-    <div *ngFor="let i of currentUserDetails">
+    <div *ngFor="let i of EmployeeList">
         <mat-grid-tile>
             <div id="tile" (click)="onClick(i.EmployeeId)"> Employee Name: {{i.EmployeeName}} <br><br> Team:
                 {{i.TeamNumber}} <br><br> Phone Number: {{i.PhoneNumber}}

@@ -17,8 +17,8 @@ import { AuthorizationService } from '../login/authorization.service';
     CommonModule,
     EmployeeRoutingModule,
     MatGridListModule
-
   ],
+
   providers: [EmployeeInfocanActivateService, AuthorizationService]
 })
 export class EmployeeModule { }

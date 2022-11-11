@@ -1,7 +1,8 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { InfoListServiceService } from '../employee-information/info-list-service.service';
+import { InfoListServiceService } from 'src/app/services/info-list-service.service';
+import { IEmployeeInformation } from '../listInterface';
+
 
 @Component({
   selector: 'app-employee-list',
@@ -10,10 +11,7 @@ import { InfoListServiceService } from '../employee-information/info-list-servic
 })
 
 export class EmployeeListComponent implements OnInit {
-  listOfEmployees: any;
-  EmployeeList: any
-  currentUserDetails: any[] = [];
-  currentUser: any;
+  EmployeeList: IEmployeeInformation[] = [];
 
   constructor(private EmployeeInfoList: InfoListServiceService, private router: Router) { }
 
@@ -22,8 +20,7 @@ export class EmployeeListComponent implements OnInit {
 
     this.EmployeeList = JSON.parse(localStorage.getItem("EmployeeInformation") || "{}")
     for (let info of this.EmployeeList) {
-      info.TeamNumber = this.EmployeeInfoList.getTeamDepartment(info.TeamNumber)
-      this.currentUserDetails.push(info);
+      info.TeamNumber = this.EmployeeInfoList.getTeamDepartment(Number(info.TeamNumber))
     }
   }
 

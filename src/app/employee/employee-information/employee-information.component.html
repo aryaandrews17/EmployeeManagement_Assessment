@@ -1,6 +1,9 @@
-<div id="infoContainer" *ngFor="let  i of currentUserDetails">
-    <p id="info">Employee Id: {{i.EmployeeId}} <br><br> Address: {{i.Address}} <br><br> Employee Name:
-        {{i.EmployeeName}} <br><br> Information: {{i.Information}}<br><br>
-        Phone Number: {{i.PhoneNumber}} <br><br>Team Number: {{i.TeamNumber}}
+<div id="infoContainer">
+    <p id="info">Employee Id: {{currentUserDetails.EmployeeId}} 
+        <br><br> Address: {{currentUserDetails.Address}}
+        <br><br> Employee Name: {{currentUserDetails.EmployeeName}} 
+        <br><br> Information: {{currentUserDetails.Information}}
+        <br><br> Phone Number: {{currentUserDetails.PhoneNumber}} 
+        <br><br>Team Number: {{currentUserDetails.TeamNumber}}
     </p>
 </div>

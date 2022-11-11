@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LoginComponent } from 'src/app/login/login.component';
-import { EmployeeInformation } from '../listInterface';
+import { IEmployeeInformation } from '../employee/listInterface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +8,9 @@ import { EmployeeInformation } from '../listInterface';
 
 
 export class InfoListServiceService {
-  EmployeeList: any;
 
 
-  private EmployeeInfoList: EmployeeInformation[] = [
+  private EmployeeInfoList: IEmployeeInformation[] = [
     {
       EmployeeName: 'A',
       TeamNumber: 1,
@@ -86,15 +85,7 @@ export class InfoListServiceService {
     return (this.teamDepartment[(teamNo) - 1])
   }
 
-  GetEmployeeInfoList() {
-    return this.EmployeeInfoList;
-  }
-
   setDataInLocalStorage() {
     localStorage.setItem("EmployeeInformation", JSON.stringify(this.EmployeeInfoList))
   }
-
-
-
-
 }

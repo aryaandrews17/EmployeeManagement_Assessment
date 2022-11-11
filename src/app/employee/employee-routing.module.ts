@@ -19,13 +19,11 @@ const routes: Routes = [
     path: 'EmployeeInformation/:employeeId',
     component: EmployeeInformationComponent, canActivate: [AuthorizationService, EmployeeInfocanActivateService]
   }
-
-
-
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class EmployeeRoutingModule { }

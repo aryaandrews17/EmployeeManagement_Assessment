@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EmployeeInformation } from '../listInterface';
-import { InfoListServiceService } from './info-list-service.service';
+import { InfoListServiceService } from 'src/app/services/info-list-service.service';
+import { IEmployeeInformation } from '../listInterface';
+
 
 @Component({
   selector: 'app-employee-information',
@@ -9,11 +10,13 @@ import { InfoListServiceService } from './info-list-service.service';
   styleUrls: ['./employee-information.component.scss']
 })
 export class EmployeeInformationComponent implements OnInit {
-  listOfEmployees: EmployeeInformation[] = [];
-  EmployeeList: any;
-  empId: any;
-  currentUser: any;
-  currentUserDetails: any;
+
+  EmployeeList: IEmployeeInformation[] = [];
+  empId: number = 0;
+  currentUserDetails: IEmployeeInformation = {
+    EmployeeId: 0, EmployeeName: '', Password: '', PhoneNumber: 0, TeamNumber: 0, Address: '',
+    Information: ''
+  };
 
   constructor(private EmployeeInfoList: InfoListServiceService, private route: ActivatedRoute) { }
 
@@ -25,14 +28,8 @@ export class EmployeeInformationComponent implements OnInit {
     })
     for (let info of this.EmployeeList) {
       if (info.EmployeeId == this.empId) {
-        this.currentUserDetails = [info]
+        this.currentUserDetails = info
       }
     }
   }
-
-
-
-
-
-
 }

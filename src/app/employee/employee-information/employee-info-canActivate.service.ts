@@ -1,18 +1,21 @@
-import { InfoListServiceService } from './info-list-service.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { IEmployeeInformation } from '../listInterface';
 
 @Injectable()
 
 export class EmployeeInfocanActivateService implements CanActivate {
     constructor(private router: Router) { }
 
-    currentUser: any;
-    id: any;
+    currentUser: IEmployeeInformation = {
+        EmployeeId: 0, EmployeeName: '', Password: '', PhoneNumber: 0, TeamNumber: 0, Address: '',
+        Information: ''
+    };
+    id: number = 0;
+    
     canActivate(route: ActivatedRouteSnapshot): boolean {
         this.currentUser = JSON.parse(localStorage.getItem('CurrentIndividual') || "{}");
-        this.id = route.paramMap.get('EmployeeId');
+        this.id = Number(route.paramMap.get('EmployeeId'));
         if (this.currentUser.TeamNumber == 7 || this.currentUser.TeamNumber == 8 || this.currentUser.EmployeeId == this.id) {
             return true;
         }

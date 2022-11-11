@@ -1,7 +1,7 @@
 
-export interface EmployeeInformation {
+export interface IEmployeeInformation {
     EmployeeName: string;
-    TeamNumber: number;
+    TeamNumber: number | string;
     PhoneNumber: number;
     Address: string;
     Information: string;
